@@ -613,7 +613,7 @@ static void usage(void) {
 	fprintf(stderr,"         For OS X 10.6 and later. Copyright © 2013 McUsr. GnU GPL 2.0.\n");
 	fprintf(stderr,"		 Filenames maybe be read from stdin.\n");
 	fprintf(stderr,"	\n");
-	fprintf(stderr,"Usage: comment [options]  [color] [1 to n ..file arguments or from stdin\n");
+	fprintf(stderr,"Usage: comment [options] [1 to n ..file arguments or from stdin\n");
 	fprintf(stderr,"	    specified by posix path, one file on each line.]\n");
 	fprintf(stderr,"		Any multi wordcomment need to be either enclosed in single double ticks\n");
 	fprintf(stderr,"		or have the spaces withing the comment escaped by \\ in order to differ\n");

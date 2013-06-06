@@ -11,7 +11,7 @@ comment: List files with Finder comments  or comments files from commandline
          For OS X 10.6 and later. Copyright © 2013 McUsr. GnU GPL 2.0.
 		 Filenames maybe be read from stdin.
 	
-Usage: comment [options]  [color] [1 to n ..file arguments or from stdin
+Usage: comment [options] [1 to n ..file arguments or from stdin
 	    specified by posix path, one file on each line.]
 		Any multi wordcomment need to be either enclosed in single double ticks
 		or have the spaces withing the comment escaped by \ in order to differ
