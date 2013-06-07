@@ -612,7 +612,7 @@ static void usage(void) {
 	fprintf(stderr,"comment: List files with Finder comments  or comments files from commandline\n");
 	fprintf(stderr,"         that aren't locked or read only. Either by setting or resetting a \n");
 	fprintf(stderr,"		 full new comment, or by prepending or appending and existing comment.\n");
-	fprintf(stderr,"         For OS X 10.6 and later. Copyright © 2013 McUsr. GnU GPL 2.0.\n");
+	fprintf(stderr,"         For OS X 10.6 and later. Copyright © 2013 McUsr. GnU LPGL 2.0.\n");
 	fprintf(stderr,"		 Filenames maybe be read from stdin.\n");
 	fprintf(stderr,"	\n");
 	fprintf(stderr,"Usage: comment [options]  [color] [1 to n ..file arguments or from stdin\n");
