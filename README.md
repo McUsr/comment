@@ -8,7 +8,7 @@ comment: version 1.0 Copyright © 2013 McUsr and put into Public Domain
 comment: List files with Finder comments  or comments files from commandline
          that aren't locked or read only. Either by setting or resetting a 
 		 full new comment, or by prepending or appending and existing comment.
-         For OS X 10.6 and later. Copyright © 2013 McUsr. GnU GPL 2.0.
+         For OS X 10.6 and later. Copyright © 2013 McUsr. Gnu LPGL 2.0.
 		 Filenames maybe be read from stdin.
 	
 Usage: comment [options] [1 to n ..file arguments or from stdin
