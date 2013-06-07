@@ -467,8 +467,10 @@ static void setFileComment(char *fn, char *newCmt ) {
 	/* TODO : signal handling */				  
 	snprintf(cmdBuffer,cmdlnSize+1,commandLineFormatString,fn,newCmt ) ;
 	unsigned int myalarm=alarm((unsigned int)1) ;
+	close(STDOUT_FILENO);
 	system(cmdBuffer) ;
 	myalarm=alarm((unsigned int)0) ;
+	int sout = open("/dev/tty",O_RDONLY );
 	free(cmdBuffer) ;
 }
 
