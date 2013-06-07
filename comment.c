@@ -447,7 +447,7 @@ static void setFileComment(char *fn, char *newCmt ) {
 	
 	if (first_time) {
 		kern_arg_max = cmdln_maxarg() ;
-		commandLineFormatString=strdup("osascript -e \"tell application \\\"Finder\\\" to 	set the comment of (POSIX file \\\"%s\\\" as alias) to \\\"%s\\\"\"");
+		commandLineFormatString=strdup("osascript -e \"tell application \\\"Finder\\\" to 	set the comment of (POSIX file \\\"%s\\\" as alias) to \\\"%s\\\"\" >/dev/null");
 		if (commandLineFormatString == NULL) 
 			err_with_message( INTERNAL_ERR, "comment: setFileComment: Couldn't allocate memory for the formatstring for the command line! Bailing out.\n" ) ;
 		cmdLineFmtStrLen = strlen(commandLineFormatString) ;
@@ -467,10 +467,10 @@ static void setFileComment(char *fn, char *newCmt ) {
 	/* TODO : signal handling */				  
 	snprintf(cmdBuffer,cmdlnSize+1,commandLineFormatString,fn,newCmt ) ;
 	unsigned int myalarm=alarm((unsigned int)1) ;
-	close(STDOUT_FILENO);
+	// close(STDOUT_FILENO);
 	system(cmdBuffer) ;
 	myalarm=alarm((unsigned int)0) ;
-	int sout = open("/dev/tty",O_RDONLY );
+	// int sout = open("/dev/tty",O_RDONLY );
 	free(cmdBuffer) ;
 }
 
