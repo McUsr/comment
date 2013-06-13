@@ -74,7 +74,7 @@ static void macosx_ver(char *darwinversion, osxver *osxversion ) ;
 static char *osversionString(void) ;
 int osx_minor( void ) ;
 
-int		pathLengths( int *max_path_len, int *max_name_len, char *argv_0 ) ;
+int		pathLengths( int *max_path_len, int *max_name_len ) ;
 char	*full_absolute_path( char **orig_path, size_t orig_len, size_t max_path_len ) ;
 bool	validFinderFileFn(char *fn) ;
 int		maxPathCompLen( char *aPath ) ;
@@ -243,17 +243,18 @@ int main( int argc, char *argv[] )
 	
 	u_int16_t main_cmd= (optype & (~(0xF0))) ;
 	
-	if (main_cmd == CMD_LIST )  // TODO: figure the convention.
+	if (main_cmd == CMD_LIST ) {   // TODO: figure the convention.
 		doit= &listComments;
-	else if ( main_cmd & (CMD_SET | CMD_APPEND | CMD_PREPEND ))
+	} else if ( main_cmd & (CMD_SET | CMD_APPEND | CMD_PREPEND ))
 		doit= &setComments;
 	else
 		err_with_message( INTERNAL_ERR, "comment: can't happen! no valid command from main\n" ) ;
 	   
 	setbuf(stdout,NULL) ;
 	// gathering any "static" information we may need.
-	if (pathLengths(&MY_MAX_PATH_LEN, &MY_MAX_NAME_LEN, argv[0])<0) 
+	if (pathLengths(&MY_MAX_PATH_LEN, &MY_MAX_NAME_LEN)<0) 
 		err_with_message( INTERNAL_ERR, "comment: couldn't get system information for path lenghts.\n" ) ;
+	
 
 	size_t slen;
 	if (multiple == false ) {
@@ -272,6 +273,7 @@ int main( int argc, char *argv[] )
 			char *buf = malloc( (size_t) MY_MAX_PATH_LEN+1 );
 			if (buf == NULL ) 
 				err_with_message( INTERNAL_ERR, "comment: main: Couldn't allocate memory for buf.\n" ) ;
+				
 			
 			while((buf=fgets(buf,MY_MAX_PATH_LEN,stdin))!=NULL) {
 				buf[strlen(buf)-1] = '\0'  ;
@@ -562,7 +564,8 @@ static int listComments( char *fn,u_int16_t theCmd ) {
 			fprintf(stderr,"%s\n",ABSOLUTE_FILENAME );
 		else 
 			fprintf(stderr,"%s\n",fn );
-	} 
+	}
+	
 	free(ABSOLUTE_FILENAME) ;
 	return ret ;	
 }
@@ -754,9 +757,12 @@ static void macosx_ver(char *darwinversion, osxver *osxversion ) {
 }
 
 
-int pathLengths( int *max_path_len, int *max_name_len, char *argv_0 ) {
-	int fd = open(argv_0,O_RDONLY);
-	if (fd == -1) return -1 ;
+int pathLengths( int *max_path_len, int *max_name_len ) {
+	int fd = open("/",O_RDONLY);
+	if (fd == -1){
+		perror("Trouble opening \"/\" from reading from pathLengths:");
+		return -2 ;
+	}
 	if (((*max_path_len = fpathconf( fd, _PC_PATH_MAX ))) && 
 		(*max_name_len= fpathconf( fd, _PC_NAME_MAX ))) {
 		close(fd);
